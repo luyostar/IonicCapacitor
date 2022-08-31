@@ -1,0 +1,76 @@
+<ion-header translucent>
+ <ion-toolbar color="primary">
+  
+   <ion-buttons slot="start">
+     <ion-button (click)="goBack()" title="回上页"><ion-icon name="arrow-back" slot="icon-only"></ion-icon></ion-button>
+     <!-- <ion-back-button  text="" icon="arrow-back" color="danger"></ion-back-button> -->
+   </ion-buttons>
+   <ion-label ><h1>电影详情</h1></ion-label>
+  
+ </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item><ion-label color="dark"><h1 style="font-weight: bold;">{{allData["subTitle"]}}</h1></ion-label></ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <img [src]="src" width="115px" height="164px" title="贴了个貌似图片...">
+
+      </ion-col>
+      <ion-col size="7">
+        <div><ion-label color="primary" class="labelSize"><span class="spanTitle">导演：</span>{{allData["directors"]}}</ion-label></div>
+        <div><ion-label color="primary" class="labelSize"><div class="isCollapsed" title="点击可看所有角色" (click)="doExpend($event)" ><span class="spanTitle">主演：</span>{{allData["actors"]}}</div></ion-label></div>
+        <div><ion-label color="primary" class="labelSize"><span class="spanTitle">类型：</span>{{allData["types"]}}</ion-label></div>
+        <div><ion-label color="primary" class="labelSize"><span class="spanTitle">制片国家/地区：</span>{{allData["region"]}}</ion-label></div>
+        <div><ion-label color="primary" class="labelSize"><span class="spanTitle">上映日期：</span>{{allData["release_year"]}}</ion-label></div>
+        <div><ion-label color="primary" class="labelSize"><span class="spanTitle">片长：</span>{{allData["duration"]}}</ion-label></div>
+        <div><ion-label color="primary"  class="labelSize"><span class="spanTitle">评分：</span>{{allData["rate"]}}</ion-label>
+          &nbsp;&nbsp;<span style="position:relative;top: 2px;" title="{{allData['star']}} 星">
+           <ion-icon name="{{(allData['star']>0)?((allData['star']<1)?'star-half':'star'):'star-outline'}}" class="star" color="warning"></ion-icon>
+           <ion-icon name="{{(allData['star']>1)?((allData['star']<2)?'star-half':'star'):'star-outline'}}" class="star" color="warning"></ion-icon>
+           <ion-icon name="{{(allData['star']>2)?((allData['star']<3)?'star-half':'star'):'star-outline'}}" class="star" color="warning"></ion-icon>
+           <ion-icon name="{{(allData['star']>3)?((allData['star']<4)?'star-half':'star'):'star-outline'}}" class="star" color="warning"></ion-icon>
+           <ion-icon name="{{(allData['star']>4)?((allData['star']<5)?'star-half':'star'):'star-outline'}}" class="star" color="warning"></ion-icon>
+           
+           </span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3"><span class="spanTitle" style="position:relative;top:8px;color: blue;">购买数：</span></ion-col>
+      <ion-col size="2">
+          <ion-button fill="outline" size="small" shape="round" (click)="doReduce()"><ion-icon name="remove"></ion-icon></ion-button>     
+      </ion-col >
+      <ion-col size="1" style="text-align: center;"> 
+        <span class="spanTitle1" style="color:black;text-align: center;font-weight: bold;">{{numBuy}}</span>
+      </ion-col >
+      <ion-col size="2"> 
+        <ion-button fill="outline" size="small" shape="round" (click)="doAdd()" ><ion-icon name="add" color="danger"></ion-icon></ion-button>      
+      </ion-col >
+      <ion-col size="4">
+        <ion-button shape="round" (click)="addCart()">加购物车</ion-button>     
+      </ion-col >
+     </ion-row>
+  </ion-grid>
+ </ion-item>
+
+ <!-- 用户评论 -->
+  <ion-item  lines="none">
+    <div><ion-label >
+      <span class="spanTitle" *ngIf="allData['short_Comment_Content']!=undefined">用户评论 :</span>
+    </ion-label></div>
+  </ion-item>
+  <ion-item lines="none">
+  <div><ion-label class="ion-text-wrap">
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="spanTitle" *ngIf="allData['short_Comment_Content']!=undefined">{{allData['short_Comment_Content']}}</span>
+  </ion-label></div>
+  </ion-item>
+
+
+</ion-content>

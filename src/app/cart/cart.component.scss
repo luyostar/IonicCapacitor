@@ -1,0 +1,41 @@
+.spanTitle {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color:blue;
+   
+}
+.spanTitle1 {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color:black;
+   
+}
+
+.round {
+    --width:10px;
+    --height:10px;
+    --border-radius: 25%;
+    --vertical-align: middle;
+    position: relative;
+    top: -10px;
+    text-align: left;
+ 
+}
+.round2 {
+    
+    --width:10px;
+    --height:10px;
+    --border-radius: 10%;
+    --vertical-align: middle;
+    position: relative;
+    top: -7px;
+    text-align: left;
+ 
+}
+
+.itemStyle {
+    height: 50px;
+    border-bottom: 0.3px solid yellowgreen;
+    position: relative;
+    vertical-align: middle;
+}

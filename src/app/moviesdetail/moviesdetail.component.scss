@@ -1,0 +1,29 @@
+.spanTitle {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color: #666666;
+}
+.spanTitle1 {
+    font: 24px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color: #666666;
+}
+
+.labelSize {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+
+}
+
+
+.star {
+    top: 2px;
+}
+
+.isCollapsed{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    cursor:pointer;
+
+}

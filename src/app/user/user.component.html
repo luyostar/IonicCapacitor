@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div >
+      <ion-title color="light"><h1 style="position: relative;top: -5px;">用户信息 ({{(isLogin==true)?userName:"未登录"}})</h1></ion-title>
+     </div>
+     <ion-buttons slot="start">
+     <ion-button (click)="exitApp()"><ion-icon name="people" slot="icon-only"></ion-icon></ion-button>
+     </ion-buttons>
+     <ion-buttons slot="end" *ngIf="isLogin">
+      <ion-button fill="clear" title="退出登录" (click)="quit()">  <ion-icon name="exit" slot="icon-only" color="dark"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+<br>
+<br>
+<form *ngIf="(!isLogin && status==0)">
+   <ion-card>
+    <ion-card-header  style="height: 40px;background-color:#4854e0;"><span style="position:relative ;top:-8px ;color: white;">用户登录</span></ion-card-header>
+   
+   <ion-card-content>
+       <ion-item style="text-align: center;" lines="none"><ion-label color="primary" >账 号：  </ion-label>
+        <!-- <input name="userid" [(ngModel)]="userId"> -->
+        <ion-input name="userid" [(ngModel)]="userId" maxlength="10"></ion-input>
+      </ion-item>
+       <ion-item style="text-align: center;" lines="none"><ion-label color="primary">密 码：  </ion-label>
+        <!-- <input name="userpwd"  [(ngModel)]="userPwd" type="password"> -->
+        <ion-input name="userpwd"  [(ngModel)]="userPwd" type="password"></ion-input>
+      </ion-item>
+        
+       <ion-grid>
+        <ion-row>
+          <ion-col size="4" push="2">
+            <ion-button (click)="login()" size="small"><ion-icon name="log-in" slot="start"></ion-icon>用户登陆</ion-button>
+          </ion-col>
+          <ion-col size="4" push="4">
+            <ion-button size="small" (click)="goSign()" color="success"><ion-icon name="checkmark" slot="start" ></ion-icon>去注册</ion-button>
+          </ion-col>
+        </ion-row>
+       </ion-grid>
+       <ion-label color="danger" *ngIf="isLogin==false">{{errMsg}}</ion-label>
+   </ion-card-content>
+
+  </ion-card>
+</form>
+
+<!-- 新用户注册 -->
+<form #f="ngForm" (ngSubmit)="formSubmit(f)" novalidate *ngIf="status==1">
+  <ion-card>
+    <ion-card-header  style="height: 40px;background-color: #28ba62;"><span style="position:relative ;top:-8px ;color: white;">新用户注册</span></ion-card-header>
+    <ion-card-content>
+      <ion-item style="text-align: center; "><ion-label color="primary" >账 号：  </ion-label>
+        <!-- <input name="uId" ngModel required > -->
+        <ion-input name="uId" ngModel required maxlength="10"></ion-input>
+      </ion-item>
+      <ion-item style="text-align: center;"><ion-label color="primary" >名 称： </ion-label> 
+        <!-- <input name="uName" ngModel required> -->
+        <ion-input name="uName" ngModel required="" maxlength="50"></ion-input>
+      </ion-item>
+      <ion-item style="text-align: center;"><ion-label color="primary">密 码：  </ion-label>
+        <!-- <input name="uPwd" ngModel required type="password"> -->
+        <ion-input name="uPwd" ngModel required type="password"></ion-input>
+      </ion-item>
+      <div style="text-align: right;">
+        <ion-button size="small" type="ngSubmit" color="success"><ion-icon name="checkmark" slot="start" ></ion-icon>新人注册 </ion-button>
+          &nbsp;&nbsp;<ion-button (click)="returnLogin()" size="small" ><ion-icon name="log-in" slot="start"></ion-icon>返回登陆</ion-button> 
+       </div>
+    </ion-card-content>
+   
+    <ion-label color="danger" *ngIf="isLogin==false">{{errMsg}}</ion-label>
+  </ion-card>
+</form>
+
+<!-- 显示已登录信息 -->
+<ion-list *ngIf="status==2">
+    <ion-item><ion-icon slot="start" name="people" color="primary"></ion-icon><span style="color: blue;">用户名称：{{userName}}</span></ion-item>
+    <ion-item><ion-icon slot="start" name="bus" color="primary"></ion-icon><span style="color: blue;">用户账号：{{userId}}</span></ion-item>
+    <ion-item>登录时间：{{result["loginTime"] | date:"YYYY-MM-dd HH:mm:ss"}}</ion-item>
+</ion-list>
+
+</ion-content>

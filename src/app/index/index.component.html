@@ -1,0 +1,72 @@
+<ion-header translucent>
+ <ion-toolbar color="primary" >
+  <div >
+   <ion-title color="light"><h1 style="position: relative;top: -5px;">天涯电影</h1></ion-title>
+  </div>
+  <ion-buttons slot="start">
+    <ion-button ><ion-icon name="home" slot="icon-only"></ion-icon></ion-button>
+  </ion-buttons>
+ </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-icon name="thermometer-outline" color="danger" ></ion-icon>
+    <span style="padding-left: 10px;"><ion-label>最近热门电影</ion-label></span>
+  </ion-item>
+  
+  
+  <ion-card>
+    <ion-card-content>
+      <ion-spinner name="lines" *ngIf="isShow"  color="primary" style="position:relative;left: 50%;display: inline-block;" #spinner></ion-spinner>
+      
+      <ion-grid>
+        <ion-row>
+          
+          <ion-col size="6" *ngFor="let item of allData[0]">
+            <div  >
+            <img [src]="item['cover']" style="cursor: pointer;" referrerpolicy="no-referrer" width="115px" height="164px" routerLink="/moviesdetail/" [queryParams]="{mid:item['mid'],src:item['cover']}">
+            <br> 
+            <span *ngIf="item['is_new']=='True'">          
+            <img src="../../assets/icon/new.png"  width="16px" height="16px" class="hotImg">
+            </span>
+            <ion-label color="primary">  {{item["title"]}}</ion-label>
+            <ion-label color="warning">  {{item["rate"]}}</ion-label>
+           </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- 影评 -->
+  <ion-item>
+    <ion-icon name="happy-outline" color="danger" ></ion-icon>
+    <span style="padding-left: 10px;"><ion-label color="dark">最受欢迎的影评</ion-label></span>
+  </ion-item>
+  <ion-grid>
+    
+    <ion-row *ngFor="let obj of commentData[0]">       
+      <ion-col size="3">
+        <img [src]="obj['subjectUrl']" referrerpolicy="no-referrer">
+      </ion-col>
+      <ion-col size="9">
+        <img [src]="obj['avatorUrl']" referrerpolicy="no-referrer" width="18px" height="18px" class="hotImg">        
+        <ion-label color="primary" class="labelSize">  {{obj["uName"]}}</ion-label>
+        <ion-label color="primary" class="labelSize">  ({{obj["uId"]}})</ion-label>
+        <div>
+          <ion-label color="primary"><span class="spanTitle">{{obj["subTitle"]}}</span></ion-label>
+          
+        </div>
+        <div>
+          <ion-label color="primary"><span class="spanTitle">{{obj["subContent"]}}</span></ion-label>
+          
+        </div>
+      </ion-col>      
+    </ion-row>
+
+    <ion-item><span class="spanTitle" style="font-weight: bold;color: blue;">已经到底部</span></ion-item>
+   
+  </ion-grid>
+
+</ion-content>

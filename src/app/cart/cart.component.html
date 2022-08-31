@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div >
+      <ion-title color="light"><h1 style="position: relative;top: -5px;">购物车 ({{cartList.length}})</h1></ion-title>
+     </div>
+     <ion-buttons slot="start">
+     <ion-button><ion-icon name="cart" slot="icon-only"></ion-icon></ion-button>
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- <ion-button (click)="getCartList()"></ion-button> -->
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1" ><ion-label class="spanTitle" style="position:relative;top: 8px;">✔</ion-label></ion-col>
+          <ion-col size="6" ><ion-label class="spanTitle" style="position:relative;top: 8px;">电影名称</ion-label></ion-col>
+          <ion-col size="2" >
+            <ion-label class="spanTitle"><span style="color: red;">数量</span></ion-label>
+            <ion-label class="spanTitle">单价</ion-label>
+          </ion-col>
+          
+          <ion-col size="2" ><ion-label class="spanTitle" style="position:relative;top: 8px;">金额</ion-label></ion-col>
+          <ion-col size="1" pull="0.5" style="text-align: right;"><ion-label class="spanTitle" title="删除当前项目" style="position:relative;top: 8px;text-align: right;">删</ion-label></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    
+    <ion-item  lines="none" *ngFor="let item of cartList,index as i" class="itemStyle">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1" >
+           <ion-checkbox  class="round" style="top: -10px;" (ionChange)="calcMoney(i,$event)"></ion-checkbox>
+            </ion-col>
+          <ion-col size="6" title="{{item['moviename']}}">
+            <ion-label class="spanTitle1" style="position:relative;top: 8px;white-space: normal;overflow: visible;">{{item['moviename']}}</ion-label>
+          </ion-col>
+          <ion-col size="2" >
+            <ion-label class="spanTitle1"><span style="color: red;">{{item['buynum']}} </span></ion-label>
+            <ion-label class="spanTitle1">{{ item['price'] | currency:'¥'}}</ion-label>
+          </ion-col>
+          <ion-col size="2" ><ion-label class="spanTitle1" style="position:relative;top: 8px;">{{ item['buynum'] * item['price'] | currency:'¥'}}</ion-label></ion-col>
+          <ion-col size="1" pull="0.5" >
+              <ion-button fill="clear" class="round" (click)="delList(i)" style="position:relative;top: 2px;">✖</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    
+    <ion-item lines="none">
+    
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" ><ion-label class="spanTitle">结算总额：</ion-label></ion-col>  
+          <ion-col size="6" ><ion-label class="spanTitle">{{totalMoney | currency:'¥ '}}</ion-label></ion-col>        
+          
+          
+        </ion-row>
+           
+        <ion-row>
+          <ion-col size="4" >
+            <ion-button  class="round2" (click)="billCount()"><ion-icon name="home" slot="start"></ion-icon>去结算</ion-button>
+          </ion-col>
+          
+           <ion-col size="6" >
+            <ion-button  class="round2" color="danger" (click)="clearList()" ><ion-icon name="bus" slot="start"></ion-icon>清空购物</ion-button>
+          </ion-col>       
+
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    
+
+
+  </ion-list>
+
+</ion-content>

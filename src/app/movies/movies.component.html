@@ -1,0 +1,137 @@
+
+<ion-header >    
+    <ion-toolbar  color="primary">
+       
+      <ion-buttons slot="start" id="main" >
+        <ion-menu-button title="选电影"></ion-menu-button>
+      </ion-buttons>
+      
+      <ion-buttons >
+        <ion-searchbar placeholder="搜电影、影人..." (ionInput)="handleInput($event)" animated="true" color="light" #searchbar></ion-searchbar>
+     </ion-buttons>
+     <ion-buttons slot="end">
+       <ion-button fill="clear" (click)="doAlipay()">  <ion-icon name="logo-alipay" slot="icon-only"></ion-icon></ion-button>
+     </ion-buttons>
+    
+     </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <!-- 拉取内容 -->
+    <div *ngIf="allData.length>0" id="box">
+    
+    <ion-item  *ngFor="let in of [].constructor(itemCount),let i=index">
+    <ion-grid>
+        <ion-row>
+            <ion-col size="6">
+                
+                    <img [src]="allData[i*2]['cover']" style="cursor: pointer;" referrerpolicy="no-referrer" routerLink="/moviesdetail/" [queryParams]="{mid:allData[i*2]['mid'],src:allData[i*2]['cover']}"  width="115px" height="164px">
+                    <br>
+                    <span *ngIf="allData[i*2]['is_new']=='True'">          
+                    <img src="../../assets/icon/new.png"  width="16px" height="16px" class="hotImg">
+                    </span>
+                    <span class="spanTitle">  {{allData[i*2]["title"]}}</span>
+                    <span class="spanRate">  {{allData[i*2]["rate"]}}</span>
+                   
+            </ion-col>
+            <ion-col size="6">
+                <div  style="cursor: hand;">
+                    <img [src]="allData[i*2+1]['cover']" style="cursor: pointer;" referrerpolicy="no-referrer" routerLink="/moviesdetail/" [queryParams]="{mid:allData[i*2+1]['mid'],src:allData[i*2+1]['cover']}" width="115px" height="164px">
+                    <br> 
+                    <span *ngIf="allData[i*2+1]['is_new']">          
+                    <img src="../../assets/icon/new.png"  width="16px" height="16px" class="hotImg">
+                    </span>
+                    <span class="spanTitle">  {{allData[i*2+1]["title"]}}</span>
+                    <span class="spanRate">  {{allData[i*2+1]["rate"]}}</span>
+                   </div>
+
+            </ion-col>
+           
+        </ion-row>
+    </ion-grid>
+    </ion-item>
+   
+    </div>
+
+    <!-- <ion-card>
+        <ion-card-content>
+          <ion-spinner name="lines" *ngIf="onShow"  color="primary" style="position:relative;left: 50%;display: inline-block;" ></ion-spinner>
+          
+          <ion-grid>
+            <ion-row>
+              
+              <ion-col size="6" *ngFor="let item of allData">
+                <div  style="cursor: hand;">
+                <img [src]="item['cover']" referrerpolicy="no-referrer" width="115px" height="164px">
+                <br> 
+                <span *ngIf="item['is_new']">          
+                <img src="../../assets/icon/new.png"  width="16px" height="16px" class="hotImg">
+                </span>
+                <ion-label color="primary">  {{item["title"]}}</ion-label>
+                <ion-label color="warning">  {{item["rate"]}}</ion-label>
+               </div>
+              </ion-col>
+              <ion-item></ion-item>
+            </ion-row>
+            
+          </ion-grid>
+        </ion-card-content>
+    </ion-card> -->
+
+    
+    
+    <ion-button fill="clear" expand="full" *ngIf="start>=12"><h5>没有更多了</h5></ion-button>
+    
+    <ion-infinite-scroll threshold="50px"  #infinite (ionInfinite)="getMore($event)" >
+        <ion-infinite-scroll-content loadingSpinner="lines" loadingText="加载更多...">             
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>   
+    
+      
+
+
+    <!-- 侧边栏菜单 -->
+    <ion-menu side="start" menuId="first" contentId="main">
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>选电影</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+   
+            <ion-item button (click)="doMenu(1)" >              
+              <ion-icon name="mail" slot="start" ></ion-icon>
+              <ion-label >热门</ion-label>
+             
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==1"></ion-icon>            
+              
+            </ion-item>
+            <ion-item  button (click)="doMenu(2)" >
+              <ion-icon name="paper-plane" slot="start"></ion-icon>
+              <ion-label>最新</ion-label>
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==2"></ion-icon> 
+            </ion-item>
+            <ion-item  button (click)="doMenu(3)">
+              <ion-icon name="heart" slot="start"></ion-icon>
+              <ion-label>经典</ion-label>
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==3"></ion-icon> 
+            </ion-item>
+            <ion-item  button (click)="doMenu(4)">
+              <ion-icon name="archive" slot="start"></ion-icon>
+              <ion-label>天涯高分</ion-label>
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==4"></ion-icon> 
+            </ion-item>
+            <ion-item button (click)="doMenu(5)">
+              <ion-icon name="trash" slot="start"></ion-icon>
+              <ion-label>冷门佳片</ion-label>
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==5"></ion-icon> 
+            </ion-item>
+            <ion-item  button (click)="doMenu(6)">
+              <ion-icon name="warning" slot="start"></ion-icon>
+              <ion-label>可播放</ion-label>
+              <ion-icon name="checkmark" slot="end"  *ngIf="typeId==6"></ion-icon> 
+            </ion-item>
+          </ion-list>
+        
+</ion-content>
