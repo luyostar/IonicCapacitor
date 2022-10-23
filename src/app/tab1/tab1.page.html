@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1(Json 序列化)
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <p>Json对象序号化：{{stringResult}}</p>
+  <p>字符窜转成Json对象：{{parseResult}}</p>
+  <ion-button (click)="JsonParse()">Parse</ion-button>
+  <ion-button (click)="JsonStringify()">Stringify</ion-button>
+
+<p></p>
+<p></p>
+<p>...三个点之ES6扩展运算符</p>
+<ion-button (click)="doExtend()">扩展运算符</ion-button>
+</ion-content>

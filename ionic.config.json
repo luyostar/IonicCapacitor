@@ -1,0 +1,19 @@
+{
+  "name": "天涯电影",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api", 
+      "proxyUrl": "https://127.0.0.1:5000/api"
+    },
+    {
+      "path": "/j", 
+      "proxyUrl": "https://movie.douban.com/j"
+    }
+  ]
+  
+}
